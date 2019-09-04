@@ -29,8 +29,8 @@ namespace EventsNearMe.Models
         public string Organizer { get; set; }
         public EventCategory EventCategory { get; set; }
         public bool IsFree { get; set; }
-        public double price { get; set; }
-        public Location location { get; set; }
+        public double Price { get; set; }
+        public Location Location { get; set; }
         public string Description { get; set; }
         public List<string> Tags { get; set; }
     }
