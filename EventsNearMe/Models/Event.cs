@@ -25,7 +25,7 @@ namespace EventsNearMe.Models
     public class Event
     {
         public string Name { get; set; }
-        public Dictionary<DateTime, int> date { get; set; }
+        public Dictionary<DateTime, int> dates { get; set; }
         public string Organizer { get; set; }
         public EventCategory EventCategory { get; set; }
         public bool IsFree { get; set; }
@@ -33,5 +33,22 @@ namespace EventsNearMe.Models
         public Location Location { get; set; }
         public string Description { get; set; }
         public List<string> Tags { get; set; }
+
+        public Event()
+        {
+        }
+
+        public Event(string name, Dictionary<DateTime, int> date, string organizer, EventCategory eventCategory, bool isFree, double price, Location location, string description, List<string> tags)
+        {
+            Name = name;
+            dates = date;
+            Organizer = organizer;
+            EventCategory = eventCategory;
+            IsFree = isFree;
+            Price = price;
+            Location = location;
+            Description = description;
+            Tags = tags;
+        }
     }
 }
