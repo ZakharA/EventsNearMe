@@ -1,10 +1,11 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
-    <div class="card-deck">
+    <div class="card-deck mb-4">
         @RenderPage("~/Views/Shared/_EventCard.cshtml")
         @RenderPage("~/Views/Shared/_EventCard.cshtml")
         @RenderPage("~/Views/Shared/_EventCard.cshtml")
         @RenderPage("~/Views/Shared/_EventCard.cshtml")
     </div>
+    
+    @RenderPage("~/Views/Shared/_Pagination.cshtml")
