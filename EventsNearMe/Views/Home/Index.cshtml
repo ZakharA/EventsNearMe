@@ -1,12 +1,15 @@
-﻿@model EventsNearMe.Models.Event[]
+﻿@using EventsNearMe.Models
+@model Event[]
+
 @{
     ViewBag.Title = "Home Page";
 }
-    <div class="card-deck mb-4">
-        @foreach (EventsNearMe.Models.Event e in Model)
-        {
-            @RenderPage("~/Views/Shared/_EventCard.cshtml", new { Event = e })
-        }
-    </div>
-    
-    @RenderPage("~/Views/Shared/_Pagination.cshtml")
+
+<div class="card-deck mb-4">
+    @foreach (Event e in Model)
+    {
+        @RenderPage("~/Views/Shared/_EventCard.cshtml", new { Event = e })
+    }
+</div>
+
+@RenderPage("~/Views/Shared/_Pagination.cshtml")
