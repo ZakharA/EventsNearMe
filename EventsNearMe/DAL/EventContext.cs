@@ -1,4 +1,6 @@
 ﻿using EventsNearMe.Models;
+using EventsNearMe.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,7 +11,7 @@ using System.Web;
 namespace EventsNearMe.DAL
 {
 
-    public class EventContext: DbContext
+    public class EventContext: IdentityDbContext<EventOrganizer>
     {
         public EventContext(): base("EventContext")
         {
