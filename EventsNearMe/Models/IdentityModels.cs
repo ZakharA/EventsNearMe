@@ -21,7 +21,7 @@ namespace EventsNearMe.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("eventsNearMe", throwIfV1Schema: false)
         {
         }
 
