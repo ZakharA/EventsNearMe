@@ -8,6 +8,6 @@ namespace EventsNearMe.Models
 {
     public class EventOrganizer : IdentityUser
     {
-
+        public virtual ICollection<Event> createdEvents { get; set; }
     }
 }
