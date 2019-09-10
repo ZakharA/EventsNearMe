@@ -1,31 +1,29 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(EventsNearMe.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(EventsNearMe.App_Start.NinjectWebCommon), "Stop")]
+﻿using System;
+using System.Web;
+using EventsNearMe.Infrastructure;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+
+using Ninject;
+using Ninject.Web.Common;
+using Ninject.Web.Common.WebHost;
 
 namespace EventsNearMe.App_Start
 {
-    using System;
-    using System.Web;
-    using EventsNearMe.Infrastructure;
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
-    using Ninject;
-    using Ninject.Web.Common;
-    using Ninject.Web.Common.WebHost;
-
-    public static class NinjectWebCommon 
+    public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -33,7 +31,7 @@ namespace EventsNearMe.App_Start
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -62,6 +60,6 @@ namespace EventsNearMe.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             System.Web.Mvc.DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
-        }        
+        }
     }
 }

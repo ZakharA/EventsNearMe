@@ -22,8 +22,8 @@ namespace EventsNearMe.Controllers
             myEvent3.Name = "event 3";
             myEvent4.Name = "event 4";
 
-            Event[] events = { myEvent1, myEvent2, myEvent3, myEvent4};
-        
+            Event[] events = { myEvent1, myEvent2, myEvent3, myEvent4 };
+
             return View(events);
         }
 

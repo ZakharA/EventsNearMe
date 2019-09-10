@@ -6,7 +6,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AA2493FF-5020-424B-A451-7B09D7D0AACC}</ProjectGuid>
+    <ProjectGuid>{E97EA3D1-9E39-4D6C-9578-5D8B2E1819EC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EventsNearMe.Tests</RootNamespace>
@@ -100,7 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EventsNearMe\EventsNearMe.csproj">
-      <Project>{3917A1FE-CFEC-4C0E-B29D-530437F70001}</Project>
+      <Project>{CD6CECC4-68F4-40CD-95F9-D7D8EF962811}</Project>
       <Name>EventsNearMe</Name>
     </ProjectReference>
   </ItemGroup>

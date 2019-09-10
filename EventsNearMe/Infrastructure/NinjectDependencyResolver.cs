@@ -19,7 +19,7 @@ namespace EventsNearMe.Infrastructure
 
         private void addBindings()
         {
-           
+
         }
 
         public object GetService(Type serviceType)
