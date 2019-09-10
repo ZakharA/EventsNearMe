@@ -7,17 +7,26 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EventsNearMe.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EventsNearMe.Controllers
 {
+    [Authorize]
     public class EventsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        
+        public EventsController()
+        {
+        }
 
         // GET: Events
         public ActionResult Index()
         {
-            return View(db.Events.ToList());
+            var userId = User.Identity.GetUserId();
+            var result = db.Events.Where(e => e.Organizer.Id == userId).ToList();
+            return View(result);
         }
 
         // GET: Events/Details/5

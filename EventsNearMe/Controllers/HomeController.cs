@@ -9,22 +9,12 @@ namespace EventsNearMe.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ActionResult Index()
         {
-            Event myEvent1 = new Event();
-            Event myEvent2 = new Event();
-            Event myEvent3 = new Event();
-            Event myEvent4 = new Event();
-
-            myEvent1.Name = "event 1";
-            myEvent2.Name = "event 2";
-            myEvent3.Name = "event 3";
-            myEvent4.Name = "event 4";
-
-            Event[] events = { myEvent1, myEvent2, myEvent3, myEvent4 };
-
-            return View(events);
+           
+            return View(db.Events.ToArray());
         }
 
         public ActionResult About()

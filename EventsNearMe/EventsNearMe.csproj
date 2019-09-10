@@ -190,9 +190,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Migrations\201909100208143_InitialCreate.cs" />
-    <Compile Include="Migrations\201909100208143_InitialCreate.Designer.cs">
-      <DependentUpon>201909100208143_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201909100705498_InitialCreate.cs" />
+    <Compile Include="Migrations\201909100705498_InitialCreate.Designer.cs">
+      <DependentUpon>201909100705498_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -320,8 +320,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909100208143_InitialCreate.resx">
-      <DependentUpon>201909100208143_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909100705498_InitialCreate.resx">
+      <DependentUpon>201909100705498_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

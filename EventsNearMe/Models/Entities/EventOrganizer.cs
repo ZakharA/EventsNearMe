@@ -6,8 +6,18 @@ using System.Web;
 
 namespace EventsNearMe.Models
 {
-    public class EventOrganizer : IdentityUser
+    public class EventOrganizer : ApplicationUser
     {
         public virtual ICollection<Event> createdEvents { get; set; }
+
+        public EventOrganizer()
+        {
+            this.createdEvents = new List<Event>();
+        }
+
+        public EventOrganizer(ICollection<Event> createdEvents)
+        {
+            this.createdEvents = createdEvents;
+        }
     }
 }
