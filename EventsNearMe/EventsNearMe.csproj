@@ -194,11 +194,17 @@
     <Compile Include="Migrations\201909100705498_InitialCreate.Designer.cs">
       <DependentUpon>201909100705498_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909111106121_Event.cs" />
+    <Compile Include="Migrations\201909111106121_Event.Designer.cs">
+      <DependentUpon>201909111106121_Event.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
     <Compile Include="Models\Entities\Event.cs" />
+    <Compile Include="Models\Entities\EventLocation.cs" />
     <Compile Include="Models\Entities\EventOrganizer.cs" />
+    <Compile Include="Models\Entities\EventCategory.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -322,6 +328,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201909100705498_InitialCreate.resx">
       <DependentUpon>201909100705498_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909111106121_Event.resx">
+      <DependentUpon>201909111106121_Event.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

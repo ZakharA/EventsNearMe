@@ -8,18 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 using EventsNearMe.Models;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EventsNearMe.Controllers
 {
-    [Authorize]
     public class EventsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        
-        public EventsController()
-        {
-        }
 
         // GET: Events
         public ActionResult Index()
@@ -55,7 +49,7 @@ namespace EventsNearMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventID,Name,EventCategory,IsFree,Price,Description")] Event @event)
+        public ActionResult Create([Bind(Include = "EventID,Name,StartingDate,eventLength,IsFree,Price,Description")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +81,7 @@ namespace EventsNearMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventID,Name,EventCategory,IsFree,Price,Description")] Event @event)
+        public ActionResult Edit([Bind(Include = "EventID,Name,StartingDate,eventLength,IsFree,Price,Description")] Event @event)
         {
             if (ModelState.IsValid)
             {
