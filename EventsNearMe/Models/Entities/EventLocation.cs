@@ -11,8 +11,8 @@ namespace EventsNearMe.Models.Entities
         public string Address { get; set; }
         public string City { get; set; }
         public int PostCode { get; set; }
-        public double latitude { get; set; }
-        public double longtitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longtitude { get; set; }
 
         public EventLocation()
         {
@@ -24,8 +24,8 @@ namespace EventsNearMe.Models.Entities
             Address = address;
             City = city;
             PostCode = postCode;
-            this.latitude = latitude;
-            this.longtitude = longtitude;
+            this.Latitude = latitude;
+            this.Longtitude = longtitude;
         }
     }
 }

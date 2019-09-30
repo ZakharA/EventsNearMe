@@ -1,11 +1,10 @@
-﻿
-<section class="col-xl-6 col-lg-6 col-sm-12 mb-2">
+﻿<section class="col-xl-6 col-lg-6 col-sm-12 mb-2">
     <div class="card">
-        @*<img src="..." class="card-img-top" alt="...">*@
+        <img src="~/Content/Images/photo1x640.jpg" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">@Page.Event.Name</h5>
             <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <a href="#" class="card-link">Card link</a>
+            @Html.ActionLink("Read more",  "Details", "Events", new { id = Page.Event.EventID }, htmlAttributes: new { @class = "card-link" })
         </div>
     </div>
 </section> 

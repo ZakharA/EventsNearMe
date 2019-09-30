@@ -10,6 +10,7 @@ namespace EventsNearMe.Models
     {
         public int EventID { get; set; }
         public string Name { get; set; }
+        public string CoverImage { get; set; }
         public DateTime StartingDate { get; set; }
         public int eventLength { get; set; }
         public virtual EventOrganizer Organizer { get; set; }
