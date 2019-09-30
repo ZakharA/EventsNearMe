@@ -14,7 +14,7 @@ namespace EventsNearMe.Models
         public DateTime StartingDate { get; set; }
         public int eventLength { get; set; }
         public virtual EventOrganizer Organizer { get; set; }
-        public virtual EventCategory EventCategory { get; set; }
+        public virtual EventCategory[] EventCategory { get; set; }
         public bool IsFree { get; set; }
         public double Price { get; set; }
         public virtual EventLocation Location { get; set; }
@@ -24,7 +24,7 @@ namespace EventsNearMe.Models
         {
         }
 
-        public Event(int eventID, string name, DateTime startingDate, int eventLength, EventOrganizer organizer, EventCategory eventCategory, bool isFree, double price, EventLocation location, string description)
+        public Event(int eventID, string name, DateTime startingDate, int eventLength, EventOrganizer organizer, EventCategory[] eventCategory, bool isFree, double price, EventLocation location, string description)
         {
             EventID = eventID;
             Name = name;

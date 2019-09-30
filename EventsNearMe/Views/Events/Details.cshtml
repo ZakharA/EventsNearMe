@@ -6,60 +6,20 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>Event</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StartingDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StartingDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.eventLength)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.eventLength)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsFree)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsFree)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
+<div class="row mb-3">
+   <div class="col-sm-12 col-md-4" ><img src="~/Content/Images/@Model.CoverImage" /></div>
+    <div class="col-sm-12 col-md-8">
+        <div>@Html.DisplayFor(model => model.Name)</div>
+        <div>@Html.DisplayFor(model => model.Organizer.UserName)</div>
+        <div>@Html.DisplayFor(model => model.Price)</div>
+    </div>
 </div>
+<div class="row">
+    <div class="col-12">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+</div>
+
 <p>
     @if (User.Identity.IsAuthenticated)
     {
