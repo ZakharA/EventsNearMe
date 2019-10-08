@@ -227,9 +227,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Migrations\201910080506421_InitialCreate.cs" />
-    <Compile Include="Migrations\201910080506421_InitialCreate.Designer.cs">
-      <DependentUpon>201910080506421_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201910082352336_InitialCreate.cs" />
+    <Compile Include="Migrations\201910082352336_InitialCreate.Designer.cs">
+      <DependentUpon>201910082352336_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -364,12 +364,12 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910080506421_InitialCreate.resx">
-      <DependentUpon>201910080506421_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="Scripts\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Scripts\App_LocalResources\" />
+    <EmbeddedResource Include="Migrations\201910082352336_InitialCreate.resx">
+      <DependentUpon>201910082352336_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

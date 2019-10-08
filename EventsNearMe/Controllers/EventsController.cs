@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EventsNearMe.Models;
+using EventsNearMe.Models.Entities;
 using Microsoft.AspNet.Identity;
 
 namespace EventsNearMe.Controllers
@@ -49,7 +50,7 @@ namespace EventsNearMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Prefix = "Event")]Event @event)
+        public ActionResult Create([Bind(Include = "EventID,Name,StartingDate,eventLength,IsFree,Price,Description,Location")] Event @event)
         {
             if (ModelState.IsValid)
             {
