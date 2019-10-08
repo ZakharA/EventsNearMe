@@ -9,7 +9,8 @@ namespace EventsNearMe.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(EventsNearMe.Models.ApplicationDbContext context)

@@ -12,7 +12,7 @@ namespace EventsNearMe.Models
 
         public EventOrganizer()
         {
-            this.createdEvents = new List<Event>();
+            this.createdEvents = new HashSet<Event>();
         }
 
         public EventOrganizer(ICollection<Event> createdEvents)

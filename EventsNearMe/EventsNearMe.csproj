@@ -190,17 +190,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Migrations\201909100705498_InitialCreate.cs" />
-    <Compile Include="Migrations\201909100705498_InitialCreate.Designer.cs">
-      <DependentUpon>201909100705498_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201909111106121_Event.cs" />
-    <Compile Include="Migrations\201909111106121_Event.Designer.cs">
-      <DependentUpon>201909111106121_Event.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201909300138474_Event1.cs" />
-    <Compile Include="Migrations\201909300138474_Event1.Designer.cs">
-      <DependentUpon>201909300138474_Event1.cs</DependentUpon>
+    <Compile Include="Migrations\201910080331044_InitialCreate.cs" />
+    <Compile Include="Migrations\201910080331044_InitialCreate.Designer.cs">
+      <DependentUpon>201910080331044_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -334,14 +326,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909100705498_InitialCreate.resx">
-      <DependentUpon>201909100705498_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909111106121_Event.resx">
-      <DependentUpon>201909111106121_Event.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909300138474_Event1.resx">
-      <DependentUpon>201909300138474_Event1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910080331044_InitialCreate.resx">
+      <DependentUpon>201910080331044_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
