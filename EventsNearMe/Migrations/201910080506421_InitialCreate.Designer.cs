@@ -13,7 +13,7 @@ namespace EventsNearMe.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201910080331044_InitialCreate"; }
+            get { return "201910080506421_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

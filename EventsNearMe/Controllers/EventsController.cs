@@ -49,7 +49,7 @@ namespace EventsNearMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventID,Name,StartingDate,eventLength,IsFree,Price,Description")] Event @event)
+        public ActionResult Create([Bind(Prefix = "Event")]Event @event)
         {
             if (ModelState.IsValid)
             {

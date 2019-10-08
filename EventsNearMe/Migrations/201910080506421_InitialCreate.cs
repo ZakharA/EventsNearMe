@@ -16,6 +16,7 @@ namespace EventsNearMe.Migrations
                         CoverImage = c.String(),
                         StartingDate = c.DateTime(nullable: false),
                         eventLength = c.Int(nullable: false),
+                        EventCategory = c.Int(nullable: false),
                         IsFree = c.Boolean(nullable: false),
                         Price = c.Double(nullable: false),
                         Description = c.String(),
@@ -27,18 +28,6 @@ namespace EventsNearMe.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.Organizer_Id)
                 .Index(t => t.Location_ID)
                 .Index(t => t.Organizer_Id);
-            
-            CreateTable(
-                "dbo.EventCategories",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(maxLength: 10),
-                        Event_EventID = c.Int(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Events", t => t.Event_EventID)
-                .Index(t => t.Event_EventID);
             
             CreateTable(
                 "dbo.EventLocations",
@@ -132,14 +121,12 @@ namespace EventsNearMe.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Events", "Organizer_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Events", "Location_ID", "dbo.EventLocations");
-            DropForeignKey("dbo.EventCategories", "Event_EventID", "dbo.Events");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.EventCategories", new[] { "Event_EventID" });
             DropIndex("dbo.Events", new[] { "Organizer_Id" });
             DropIndex("dbo.Events", new[] { "Location_ID" });
             DropTable("dbo.AspNetRoles");
@@ -148,7 +135,6 @@ namespace EventsNearMe.Migrations
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.EventLocations");
-            DropTable("dbo.EventCategories");
             DropTable("dbo.Events");
         }
     }

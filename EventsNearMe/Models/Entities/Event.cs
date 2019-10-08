@@ -7,6 +7,13 @@ using System.Web;
 
 namespace EventsNearMe.Models
 {
+    public enum EventType {
+        Food,
+        Fashion,
+        Sport,
+        Entertainment
+    }
+
     public class Event
     {
         public int EventID { get; set; }
@@ -17,7 +24,8 @@ namespace EventsNearMe.Models
         [Range(1,365, ErrorMessage = "Event length must be at least one day")]
         public int eventLength { get; set; }
         public virtual EventOrganizer Organizer { get; set; }
-        public virtual ICollection<EventCategory> EventCategory { get; set; }
+        [EnumDataType(typeof(EventType))]
+        public EventType EventCategory { get; set; }
         public bool IsFree { get; set; }
         [DataType(DataType.Currency)]
         public double Price { get; set; }
@@ -27,11 +35,10 @@ namespace EventsNearMe.Models
 
         public Event()
         {
-            this.EventCategory = new HashSet<EventCategory>();
             this.Location = new EventLocation();
         }
 
-        public Event(int eventID, string name, DateTime startingDate, int eventLength, EventOrganizer organizer, EventCategory[] eventCategory, bool isFree, double price, EventLocation location, string description)
+        public Event(int eventID, string name, DateTime startingDate, int eventLength, EventOrganizer organizer, EventType eventCategory, bool isFree, double price, EventLocation location, string description)
         {
             EventID = eventID;
             Name = name;
