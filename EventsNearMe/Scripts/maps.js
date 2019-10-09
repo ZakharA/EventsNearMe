@@ -10,7 +10,7 @@ window.onload = function () {
 
     map.addControl(L.mapquest.control());
     map.on('click', onMapClick);
-
+    showEventMarker();
     getBrowserGeoLocation();
 
     function getBrowserGeoLocation() {
@@ -39,6 +39,12 @@ window.onload = function () {
         $("#Location_Latitude").val(result.latLng.lat);
         $("#Location_Longitudes").val(result.latLng.lng);
         $("#Location_PostCode").val(result.postalCode);
+    }
+
+    function showEventMarker() {
+        if ($("#Location_Latitude").val && $("Location_Longitudes").val) {
+            var marker = L.marker([$("#Location_Latitude").val(), $("#Location_Longitudes").val()]).addTo(map);
+        }
     }
 }
 

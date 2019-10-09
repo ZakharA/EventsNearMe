@@ -31,7 +31,7 @@ namespace EventsNearMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
+            Event @event = db.Events.Include(e => e.Location).FirstOrDefault(e => e.EventID == id);
             if (@event == null)
             {
                 return HttpNotFound();
