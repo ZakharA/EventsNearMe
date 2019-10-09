@@ -69,7 +69,7 @@ namespace EventsNearMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
+            Event @event = db.Events.Include(e => e.Location).FirstOrDefault(e => e.EventID == id);
             if (@event == null)
             {
                 return HttpNotFound();
@@ -82,7 +82,7 @@ namespace EventsNearMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventID,Name,StartingDate,eventLength,IsFree,Price,Description")] Event @event)
+        public ActionResult Edit([Bind(Include = "EventID,Name,StartingDate,eventLength,IsFree,Price,Description,Location")] Event @event)
         {
             if (ModelState.IsValid)
             {
