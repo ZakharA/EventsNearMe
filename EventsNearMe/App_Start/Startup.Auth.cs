@@ -58,11 +58,11 @@ namespace EventsNearMe
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = Environment.GetEnvironmentVariable("GOOGLE_SIGNIN_CIENT_ID"),
+                ClientSecret = Environment.GetEnvironmentVariable("GOOGLE_SIGNIN_SECRET")
+            });
         }
     }
 }
