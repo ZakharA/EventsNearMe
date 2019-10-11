@@ -7,10 +7,9 @@ window.onload = function () {
         layers: L.mapquest.tileLayer('map'),
         zoom: 12
     });
-
+    var layerGroup = L.layerGroup().addTo(map);
     map.addControl(L.mapquest.control());
     map.on('click', onMapClick);
-    showEventMarker();
     getBrowserGeoLocation();
 
     function getBrowserGeoLocation() {
@@ -27,7 +26,6 @@ window.onload = function () {
     }
 
     function onMapClick(e) {
-        console.log(e);
         L.mapquest.geocoding().reverse(e.latlng, updateLocationData);
     }
 
@@ -39,11 +37,13 @@ window.onload = function () {
         $("#Location_Latitude").val(result.latLng.lat);
         $("#Location_Longitudes").val(result.latLng.lng);
         $("#Location_PostCode").val(result.postalCode);
+        showEventMarker();
     }
 
     function showEventMarker() {
         if ($("#Location_Latitude").val && $("Location_Longitudes").val) {
-            var marker = L.marker([$("#Location_Latitude").val(), $("#Location_Longitudes").val()]).addTo(map);
+            layerGroup.clearLayers();
+            var marker = L.marker([$("#Location_Latitude").val(), $("#Location_Longitudes").val()]).addTo(layerGroup);
         }
     }
 }
