@@ -54,6 +54,9 @@ namespace EventsNearMe.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = User.Identity.GetUserId();
+                var user = db.Users.Find(userId);
+                @event.Organizer = user;
                 db.Events.Add(@event);
                 db.SaveChanges();
                 return RedirectToAction("Index");

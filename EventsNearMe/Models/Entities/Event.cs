@@ -25,7 +25,7 @@ namespace EventsNearMe.Models
         public DateTime StartingDate { get; set; }
         [Range(1,365, ErrorMessage = "Event length must be at least one day")]
         public int eventLength { get; set; }
-        public virtual EventOrganizer Organizer { get; set; }
+        public virtual ApplicationUser Organizer { get; set; }
         [EnumDataType(typeof(EventType))]
         public EventType EventCategory { get; set; }
         public bool IsFree { get; set; }
@@ -40,7 +40,7 @@ namespace EventsNearMe.Models
             this.Location = new EventLocation();
         }
 
-        public Event(int eventID, string name, DateTime startingDate, int eventLength, EventOrganizer organizer, EventType eventCategory, bool isFree, double price, EventLocation location, string description)
+        public Event(int eventID, string name, DateTime startingDate, int eventLength, ApplicationUser organizer, EventType eventCategory, bool isFree, double price, EventLocation location, string description)
         {
             EventID = eventID;
             Name = name;
