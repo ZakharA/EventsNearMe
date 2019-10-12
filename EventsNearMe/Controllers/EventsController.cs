@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -49,19 +50,29 @@ namespace EventsNearMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventID,Name,StartingDate,eventLength,IsFree,Price,Description,Location,Organizer")] Event @event)
+        public ActionResult Create(EventModel model)
         {
             if (ModelState.IsValid)
             {
+                if (model.coverImage != null)
+                {
+                    string path = Server.MapPath("~/Content/Images/");
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    model.coverImage.SaveAs(path + Path.GetFileName(model.coverImage.FileName));
+                }
                 var userId = User.Identity.GetUserId();
                 var user = db.Users.Find(userId);
-                @event.Organizer = user;
-                db.Events.Add(@event);
+                model.Event.Organizer = user;
+                model.Event.CoverImage = model.coverImage.FileName;
+                db.Events.Add(model.Event);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(@event);
+            return View(model.Event);
         }
 
         // GET: Events/Edit/5

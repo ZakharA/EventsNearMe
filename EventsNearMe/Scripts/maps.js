@@ -33,18 +33,18 @@ window.onload = function () {
     function updateLocationData(error, response) {
         console.log(response);
         var result = response.results[0].locations[0];
-        $("#Location_Address").val(result.street + ", " + result.adminArea3);
-        $("#Location_City").val("Melbourne");
-        $("#Location_Latitude").val(result.latLng.lat);
-        $("#Location_Longitudes").val(result.latLng.lng);
-        $("#Location_PostCode").val(result.postalCode);
+        $("#Event_Location_Address").val(result.street + ", " + result.adminArea3);
+        $("#Event_Location_City").val("Melbourne");
+        $("#Event_Location_Latitude").val(result.latLng.lat);
+        $("#Event_Location_Longitudes").val(result.latLng.lng);
+        $("#Event_Location_PostCode").val(result.postalCode);
         showEventMarker();
     }
 
     function showEventMarker() {
-        if ($("#Location_Latitude").val && $("Location_Longitudes").val) {
+        if ($("#Event_Location_Latitude").val && $("#Event_Location_Longitudes").val) {
             layerGroup.clearLayers();
-            var marker = L.marker([$("#Location_Latitude").val(), $("#Location_Longitudes").val()]).addTo(layerGroup);
+            var marker = L.marker([$("#Event_Location_Latitude").val(), $("#Event_Location_Longitudes").val()]).addTo(layerGroup);
         }
     }
 }
