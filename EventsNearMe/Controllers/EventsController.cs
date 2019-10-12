@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EventsNearMe.Models;
-using EventsNearMe.Models.Entities;
 using Microsoft.AspNet.Identity;
 
 namespace EventsNearMe.Controllers
@@ -89,6 +88,7 @@ namespace EventsNearMe.Controllers
         {
             if (ModelState.IsValid)
             {
+                db.Entry(@event.Location).State = EntityState.Modified;
                 db.Entry(@event).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

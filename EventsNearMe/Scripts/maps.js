@@ -11,6 +11,7 @@ window.onload = function () {
     map.addControl(L.mapquest.control());
     map.on('click', onMapClick);
     getBrowserGeoLocation();
+    showEventMarker();
 
     function getBrowserGeoLocation() {
         navigator.geolocation.getCurrentPosition(updatePosition, positionError);
