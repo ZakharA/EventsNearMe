@@ -30,6 +30,9 @@
                     <li class="nav-item active">
                         @Html.ActionLink("My Events", "Index", "Events", routeValues: null, htmlAttributes: new { @class = "nav-link" })
                     </li>
+                    <li class="nav-item active">
+                        @Html.ActionLink("My Bookings", "Index", "Bookings", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                    </li>
                 }
             </ul>
             @Html.Partial("_LoginPartial")
