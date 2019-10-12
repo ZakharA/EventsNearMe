@@ -21,6 +21,7 @@ namespace EventsNearMe.Models
         public string Name { get; set; }
         public string CoverImage { get; set; }
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartingDate { get; set; }
         [Range(1,365, ErrorMessage = "Event length must be at least one day")]
         public int eventLength { get; set; }
