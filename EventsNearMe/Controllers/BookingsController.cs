@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using EventsNearMe.Models;
+using System.IO;
 
 namespace EventsNearMe.Controllers
 {
@@ -28,12 +30,13 @@ namespace EventsNearMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Booking booking = db.Bookings.Find(id);
+            Booking booking = db.Bookings.Include(b => b.Event.Location).FirstOrDefault(b => b.BookingID == id);
+           // var result = new InnovationController().SendBookingConfirmation(bookingHtml, booking); 
             if (booking == null)
             {
                 return HttpNotFound();
             }
-            return View(booking);
+            return RedirectToAction("SendBookingConfirmation", "Innovation", new { @bookingID = booking.BookingID });
         }
 
         // GET: Bookings/Create
@@ -48,17 +51,21 @@ namespace EventsNearMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BookingID,EventId")] Booking booking)
+        public ActionResult Create([Bind(Include = "EventID")] int eventId)
         {
             if (ModelState.IsValid)
             {
-                db.Bookings.Add(booking);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                Booking newBooking = new Booking();
+                var userId = User.Identity.GetUserId();
+                var user = db.Users.Find(userId);
+                newBooking.EventId = eventId;
+                newBooking.User = user;
+                db.Bookings.Add(newBooking);
+                db.SaveChanges(); 
+                return View(newBooking);
             }
 
-            ViewBag.EventId = new SelectList(db.Events, "EventID", "Name", booking.EventId);
-            return View(booking);
+            return RedirectToAction("Index");
         }
 
         // GET: Bookings/Edit/5
@@ -128,5 +135,6 @@ namespace EventsNearMe.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

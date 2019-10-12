@@ -5,23 +5,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Booking details</h2>
 
-<div>
-    <h4>Booking</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Event.Name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Event.Name)
-        </dd>
-
-    </dl>
+<div class="row mb-3">
+    <div class="col-sm-12 col-md-4"><img src="~/Content/Images/@Model.Event.CoverImage" /></div>
+    <div class="col-sm-12 col-md-8">
+        <div>@Html.DisplayFor(model => model.Event.Name)</div>
+        <div>@Html.DisplayFor(model => model.Event.Organizer.UserName)</div>
+        <div>@Html.DisplayFor(model => model.Event.Price)</div>
+    </div>
 </div>
+
+<div class="row">
+    @Html.HiddenFor(model => model.Event.Location.Address, new { @id = "Event_Location_Address" })
+    @Html.HiddenFor(model => model.Event.Location.City, new { @id = "Event_Location_City" })
+    @Html.HiddenFor(model => model.Event.Location.Latitude, new { @id = "Event_Location_Latitude" })
+    @Html.HiddenFor(model => model.Event.Location.Longitudes, new { @id = "Event_Location_Longitudes" })
+    @Html.HiddenFor(model => model.Event.Location.PostCode, new { @id = "Event_Location_PostCode" })
+    <div id="map" class="col-12" style="width: 100%; height: 350px;"></div>
+</div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.BookingID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Go Back", "Index")
 </p>
+
+
+@section Scripts {
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+    @Scripts.Render("~/Scripts/maps.js")
+}
+
