@@ -56,12 +56,7 @@ namespace EventsNearMe.Controllers
             {
                 if (model.coverImage != null)
                 {
-                    string path = Server.MapPath("~/Content/Images/");
-                    if (!Directory.Exists(path))
-                    {
-                        Directory.CreateDirectory(path);
-                    }
-                    model.coverImage.SaveAs(path + Path.GetFileName(model.coverImage.FileName));
+                    saveImage(model);
                 }
                 var userId = User.Identity.GetUserId();
                 var user = db.Users.Find(userId);
@@ -75,6 +70,16 @@ namespace EventsNearMe.Controllers
             return View(model.Event);
         }
 
+        private void saveImage(EventModel model)
+        {
+            string path = Server.MapPath("~/Content/Images/");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            model.coverImage.SaveAs(path + Path.GetFileName(model.coverImage.FileName));
+        }
+
         // GET: Events/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -83,11 +88,13 @@ namespace EventsNearMe.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Event @event = db.Events.Include(e => e.Location).FirstOrDefault(e => e.EventID == id);
+            EventModel emodel = new EventModel();
+            emodel.Event = @event;
             if (@event == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            return View(emodel);
         }
 
         // POST: Events/Edit/5
@@ -95,16 +102,22 @@ namespace EventsNearMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventID,Name,StartingDate,eventLength,IsFree,Price,Description,Location")] Event @event)
+        public ActionResult Edit(EventModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@event.Location).State = EntityState.Modified;
-                db.Entry(@event).State = EntityState.Modified;
+                db.Entry(model.Event.Location).State = EntityState.Modified;
+                db.Entry(model.Event).State = EntityState.Modified;
+                if (model.coverImage != null)
+                {
+                    model.Event.CoverImage = model.coverImage.FileName;
+                    saveImage(model);
+                } 
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(@event);
+            return View(model.Event);
         }
 
         // GET: Events/Delete/5
