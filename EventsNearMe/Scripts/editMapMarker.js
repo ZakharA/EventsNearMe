@@ -3,7 +3,7 @@
 window.onload = function () {
     L.mapquest.key = 'YVOxelMfyMWXzUCKLHGgoX5FNl13x4R2';
 
-     map = L.mapquest.map('map', {
+    map = L.mapquest.map('map', {
         center: [37.7749, -122.4194],
         layers: L.mapquest.tileLayer('map'),
         zoom: 12
@@ -13,6 +13,23 @@ window.onload = function () {
     map.addControl(L.mapquest.control());
     getBrowserGeoLocation();
     showEventMarker();
+
+    map.on('click', onMapClick);
+
+    function onMapClick(e) {
+        L.mapquest.geocoding().reverse(e.latlng, updateLocationData);
+    }
+
+    function updateLocationData(error, response) {
+        console.log(response);
+        var result = response.results[0].locations[0];
+        $("#Event_Location_Address").val(result.street + ", " + result.adminArea3);
+        $("#Event_Location_City").val("Melbourne");
+        $("#Event_Location_Latitude").val(result.latLng.lat);
+        $("#Event_Location_Longitudes").val(result.latLng.lng);
+        $("#Event_Location_PostCode").val(result.postalCode);
+        showEventMarker();
+    }
 
     function getBrowserGeoLocation() {
         navigator.geolocation.getCurrentPosition(updatePosition, positionError);
@@ -42,4 +59,3 @@ window.onload = function () {
 
     }
 }
-

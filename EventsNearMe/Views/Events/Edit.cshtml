@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.coverImage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.coverImage ,  new { type = "file" })
+                @Html.TextBoxFor(model => model.coverImage, new { type = "file" })
 
                 @Html.ValidationMessageFor(model => model.coverImage, "", new { @class = "text-danger" })
             </div>
@@ -102,5 +102,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
-    @Scripts.Render("~/Scripts/maps.js")
+    @Scripts.Render("~/Scripts/editMapMarker.js")
 }
