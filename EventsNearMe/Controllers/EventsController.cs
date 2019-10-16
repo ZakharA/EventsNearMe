@@ -1,8 +1,10 @@
 ﻿using EventsNearMe.Models;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -10,6 +12,7 @@ using System.Web.Mvc;
 
 namespace EventsNearMe.Controllers
 {
+    [Authorize]
     public class EventsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -25,13 +28,14 @@ namespace EventsNearMe.Controllers
             }
             else
             {
-                 var userId = User.Identity.GetUserId();
-                 result = db.Events.Where(e => e.Organizer.Id == userId).ToList();
+                var userId = User.Identity.GetUserId();
+                result = db.Events.Where(e => e.Organizer.Id == userId).ToList();
             }
-           
+
             return View(result);
         }
 
+        [AllowAnonymous]
         // GET: Events/Details/5
         public ActionResult Details(int? id)
         {
@@ -148,9 +152,11 @@ namespace EventsNearMe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Event @event = db.Events.Find(id);
+
+            Event @event = db.Events.Include(e => e.Location).FirstOrDefault(e => e.EventID == id); ;
             db.Events.Remove(@event);
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

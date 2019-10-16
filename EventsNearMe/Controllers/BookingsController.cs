@@ -12,6 +12,7 @@ using System.IO;
 
 namespace EventsNearMe.Controllers
 {
+    [Authorize]
     public class BookingsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -19,8 +20,18 @@ namespace EventsNearMe.Controllers
         // GET: Bookings
         public ActionResult Index()
         {
-            var bookings = db.Bookings.Include(b => b.Event);
-            return View(bookings.ToList());
+            List<Booking> result;
+
+            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                result = db.Bookings.Include(b => b.Event).ToList();
+            }
+            else
+            {
+                var userId = User.Identity.GetUserId();
+                result = db.Bookings.Where(e => e.User.Id == userId).Include(b => b.Event).ToList();
+            }
+            return View(result);
         }
 
         // GET: Bookings/Details/5
