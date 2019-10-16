@@ -1,14 +1,12 @@
-﻿using System;
+﻿using EventsNearMe.Models;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using EventsNearMe.Models;
-using Microsoft.AspNet.Identity;
 
 namespace EventsNearMe.Controllers
 {
@@ -19,8 +17,18 @@ namespace EventsNearMe.Controllers
         // GET: Events
         public ActionResult Index()
         {
-            var userId = User.Identity.GetUserId();
-            var result = db.Events.Where(e => e.Organizer.Id == userId).ToList();
+            List<Event> result;
+
+            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                result = db.Events.ToList();
+            }
+            else
+            {
+                 var userId = User.Identity.GetUserId();
+                 result = db.Events.Where(e => e.Organizer.Id == userId).ToList();
+            }
+           
             return View(result);
         }
 
@@ -112,7 +120,7 @@ namespace EventsNearMe.Controllers
                 {
                     model.Event.CoverImage = model.coverImage.FileName;
                     saveImage(model);
-                } 
+                }
 
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -5,6 +5,7 @@
 # User-specific files
 EventsNearMe/Content/Images/
 EventsNearMe/Content/PDF/
+*.pdf
 *.suo
 *.user
 *.userosscache
