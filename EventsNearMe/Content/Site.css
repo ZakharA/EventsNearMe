@@ -1,5 +1,4 @@
 ﻿body {
-
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -31,4 +30,48 @@ img {
 .landscape-img {
     height: 250px;
     width: 350px;
+}
+
+.success-box {
+    margin: 50px 0;
+    padding: 10px 10px;
+    border: 1px solid #eee;
+    background: #f9f9f9;
+}
+
+    .success-box img {
+        margin-right: 10px;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .success-box > div {
+        vertical-align: top;
+        display: inline-block;
+        color: #888;
+    }
+
+.rating-stars ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.rating-stars ul > li.star {
+    display: inline-block;
+}
+
+.rating-stars ul > li.star > i.fa {
+    font-size: 2.5em; 
+    color: #ccc; 
+}
+
+.rating-stars ul > li.star.hover > i.fa {
+    color: #FFCC36;
+}
+
+.rating-stars ul > li.star.selected > i.fa {
+    color: #FF912C;
 }
