@@ -8,21 +8,27 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Event.Name)
+            Event name
+        </th>
+        <th>
+            Starting date
         </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Event.Name)
-            </td>
-            <td>
-                @Html.ActionLink("View", "Details", new { id = item.BookingID })
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Event.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Event.StartingDate)
+    </td>
+    @*<td>
+            @Html.ActionLink("View", "Details", new { id = item.BookingID })
+        </td>*@
+</tr>
     }
 
 </table>
