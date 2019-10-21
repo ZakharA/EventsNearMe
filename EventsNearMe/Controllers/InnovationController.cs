@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using IronPdf;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using System.Web.Hosting;
 
 namespace EventsNearMe.Controllers
 {
@@ -25,22 +26,9 @@ namespace EventsNearMe.Controllers
         public ActionResult SendBookingConfirmation(int bookingID)
         {
             Booking booking = db.Bookings.Include(b => b.Event.Location).FirstOrDefault(b => b.BookingID == bookingID);
-            GeneratePDF(booking);
-            return View(booking.Event);
-        }
-
-        private void GeneratePDF(Booking booking)
-        {
-            var Renderer = new IronPdf.HtmlToPdf();
-            Renderer.PrintOptions.CssMediaType = PdfPrintOptions.PdfCssMediaType.Print;
-            Renderer.PrintOptions.RenderDelay = 10000;
             string bookingHtml = RenderRazorViewToString("~/Views/Innovation/SendBookingConfirmation.cshtml", booking.Event);
-            var PDF = Renderer.RenderHtmlAsPdf(bookingHtml);
-            var pdfName = booking.BookingID.ToString() + booking.Event.EventID.ToString() + booking.Event.Name + ".pdf";
-            var OutputPath = "~/Content/PDF/"+ pdfName;
-            PDF.SaveAs(OutputPath);
-            //Execute(Server.MapPath(OutputPath), pdfName, booking).Wait();
-
+            Task.Run(async () => await sendComfirmation(booking, bookingHtml));
+            return View(booking.Event);
         }
 
         static async Task Execute(String OutputPath, string pdfName, Booking booking)
@@ -73,6 +61,33 @@ namespace EventsNearMe.Controllers
                 viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
                 return sw.GetStringBuilder().ToString();
             }
+        }
+
+        private static async Task sendComfirmation(Booking booking, string html)
+        {
+            var PDF = await RenderPdfAsync(html);
+            var pdfName = booking.BookingID.ToString() + booking.Event.EventID.ToString() + booking.Event.Name + ".pdf";
+            var OutputPath = "~/Content/PDF/" + pdfName;
+            PDF.SaveAs(HostingEnvironment.MapPath(OutputPath));
+            Execute(HostingEnvironment.MapPath(OutputPath), pdfName, booking).Wait();
+        }
+
+        private static async Task<IronPdf.PdfDocument> RenderPdfAsync(string Html, IronPdf.PdfPrintOptions PrintOptions = null)
+        {
+            return await Task.Run(() => RenderPdf(Html, PrintOptions));
+        }
+
+        private static IronPdf.PdfDocument RenderPdf(string Html, IronPdf.PdfPrintOptions PrintOptions = null)
+        {
+            var Renderer = new IronPdf.HtmlToPdf();
+            Renderer.PrintOptions.CssMediaType = PdfPrintOptions.PdfCssMediaType.Print;
+            if (PrintOptions != null)
+            {
+                Renderer.PrintOptions = PrintOptions;
+            }
+
+            PdfDocument Pdf = Renderer.RenderHtmlAsPdf(Html);
+            return Pdf;
         }
     }
 }
