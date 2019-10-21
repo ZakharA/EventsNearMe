@@ -248,6 +248,10 @@
     <Compile Include="Migrations\201910120717061_Booking update.Designer.cs">
       <DependentUpon>201910120717061_Booking update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910212218271_Rating.cs" />
+    <Compile Include="Migrations\201910212218271_Rating.Designer.cs">
+      <DependentUpon>201910212218271_Rating.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
@@ -257,6 +261,7 @@
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Rating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -319,6 +324,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\rating.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -404,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910120717061_Booking update.resx">
       <DependentUpon>201910120717061_Booking update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910212218271_Rating.resx">
+      <DependentUpon>201910212218271_Rating.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

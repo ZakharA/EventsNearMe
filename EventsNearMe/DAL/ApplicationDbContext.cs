@@ -17,6 +17,7 @@ namespace EventsNearMe.Models
         public System.Data.Entity.DbSet<EventsNearMe.Models.Event> Events { get; set; }
         public System.Data.Entity.DbSet<EventsNearMe.Models.EventLocation> EventLocations { get; set; }
         public System.Data.Entity.DbSet<EventsNearMe.Models.Booking> Bookings { get; set; }
+        public System.Data.Entity.DbSet<EventsNearMe.Models.Rating> Ratings { get; set; }
 
     }
 }
