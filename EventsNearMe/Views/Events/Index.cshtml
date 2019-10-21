@@ -4,33 +4,25 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Event name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Organizer.UserName)
+            Organizer
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartingDate)
+           Starting at
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.eventLength)
+            Duration
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsFree)
+            Free
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Price
         </th>
         <th></th>
     </tr>
@@ -56,9 +48,6 @@
         @Html.DisplayFor(modelItem => item.Price)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Description)
-    </td>
-    <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.EventID }) |
         @Html.ActionLink("Details", "Details", new { id = item.EventID }) |
         @Html.ActionLink("Delete", "Delete", new { id = item.EventID })
@@ -67,3 +56,7 @@
 }
 
 </table>
+
+<p>
+    @Html.ActionLink("Create New Event", "Create", null, new { @class = "btn btn-success float-right" })
+</p>
