@@ -4,94 +4,87 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create new event</h2>
 
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createEventForm", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Event.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Event.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Event.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.coverImage, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBox("CoverImage", "", new { type = "file" })
-                @Html.ValidationMessageFor(model => model.coverImage, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("Event title",  htmlAttributes: new { @class = "control-label " })
+        @Html.EditorFor(model => model.Event.Name, new { htmlAttributes = new { @class = "form-control", @required = ""} })
+        @Html.ValidationMessageFor(model => model.Event.Name, "", new { @class = "text-danger" })
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Event.EventCategory, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Event.EventCategory, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Event.EventCategory, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="form-group">
+        @Html.Label("Cover image", htmlAttributes: new { @class = "control-label " })
+        @Html.TextBox("CoverImage", "", new { type = "file", @class = "form-control-file" , @required = ""})
+        @Html.ValidationMessageFor(model => model.coverImage, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Event.StartingDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Event.StartingDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Event.StartingDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Event.eventLength, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Event.eventLength, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Event.eventLength, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    @Html.LabelFor(model => model.Event.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-                    @Html.EditorFor(model => model.Event.Price, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Event.Price, "", new { @class = "text-danger" })
-                </div>
+    <div class="form-group">
+        @Html.Label("Category", htmlAttributes: new { @class = "control-label " })
+        @Html.EnumDropDownListFor(model => model.Event.EventCategory, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Event.EventCategory, "", new { @class = "text-danger" })
 
-                <div class="col">
-                    @Html.LabelFor(model => model.Event.IsFree, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="form-check-inline">
-                        @Html.EditorFor(model => model.Event.IsFree)
-                        @Html.ValidationMessageFor(model => model.Event.IsFree, "", new { @class = "text-danger" })
-                    </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Starting date", htmlAttributes: new { @class = "control-label " })
+        @Html.EditorFor(model => model.Event.StartingDate, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Event.StartingDate, "", new { @class = "text-danger" })
+
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Event duration", htmlAttributes: new { @class = "control-label " })
+        @Html.EditorFor(model => model.Event.eventLength, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Event.eventLength, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                @Html.Label("Price", htmlAttributes: new { @class = "control-label " })
+                @Html.EditorFor(model => model.Event.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Event.Price, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col">
+                @Html.Label("Is FREE", htmlAttributes: new { @class = "control-label " })
+                <div class="form-check-inline">
+                    @Html.EditorFor(model => model.Event.IsFree)
+                    @Html.ValidationMessageFor(model => model.Event.IsFree, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Event.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Event.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Event.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        @Html.HiddenFor(model => model.Event.Location.Address)
-        @Html.HiddenFor(model => model.Event.Location.City)
-        @Html.HiddenFor(model => model.Event.Location.Latitude)
-        @Html.HiddenFor(model => model.Event.Location.Longitudes)
-        @Html.HiddenFor(model => model.Event.Location.PostCode)
+    <div class="form-group">
+        @Html.Label("Description", htmlAttributes: new { @class = "control-label " })
+        @Html.EditorFor(model => model.Event.Description, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Event.Description, "", new { @class = "text-danger" })
+    </div>
 
-        <div class="form-group">
-            <div id="map" class="col-12" style="width: 100%; height: 350px;"></div>
-        </div>
+    @Html.HiddenFor(model => model.Event.Location.Address, new { @required = "" })
+    @Html.HiddenFor(model => model.Event.Location.City)
+    @Html.HiddenFor(model => model.Event.Location.Latitude)
+    @Html.HiddenFor(model => model.Event.Location.Longitudes)
+    @Html.HiddenFor(model => model.Event.Location.PostCode)
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+<div class="form-group">
+    @Html.Label("Location", htmlAttributes: new { @class = "control-label" })
+    <div id="map" class="col-12" style="width: 100%; height: 350px;"></div>
+</div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-primary" />
         </div>
     </div>
 }
@@ -104,4 +97,5 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
     @Scripts.Render("~/Scripts/editMapMarker.js")
+    @Scripts.Render("~/Scripts/validation.js")
 }
