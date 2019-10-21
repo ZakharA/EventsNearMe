@@ -4,48 +4,50 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div class="row mb-3">
-    <div class="col-sm-12 col-md-4"><img src="~/Content/Images/@Model.CoverImage" /></div>
-    <div class="col-sm-12 col-md-8">
-        <div>@Html.DisplayFor(model => model.Name)</div>
-        <div>@Html.DisplayFor(model => model.Organizer.UserName)</div>
-        <div>@Html.DisplayFor(model => model.Price)</div>
+    <div class="col-sm-12 col-md-8 mb-2">
+        <div class="card">
+            <img class="card-img-top" src="~/Content/Images/@Model.CoverImage">
+            <div class="card-body">
+                <div class="card-text"><h3>@Html.DisplayFor(model => model.Name)</h3></div>
+                <div class="card-text">Organizer: @Html.DisplayFor(model => model.Organizer.UserName)</div>
+                <div class="card-text">Price: @Html.DisplayFor(model => model.Price)</div>
+                @using (Html.BeginForm("Create", "Bookings"))
+                {
+                    @Html.AntiForgeryToken()
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.HiddenFor(model => model.EventID)
+                        <div class="form-horizontal float-right">
+                            <input type="submit" value="Book" class="btn btn-success" />
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        @Html.HiddenFor(model => model.Location.Address, new { @id = "Event_Location_Address" })
+        @Html.HiddenFor(model => model.Location.City, new { @id = "Event_Location_City" })
+        @Html.HiddenFor(model => model.Location.Latitude, new { @id = "Event_Location_Latitude" })
+        @Html.HiddenFor(model => model.Location.Longitudes, new { @id = "Event_Location_Longitudes" })
+        @Html.HiddenFor(model => model.Location.PostCode, new { @id = "Event_Location_PostCode" })
+        <div id="map" class="mb-2" style="width: 100%; height: 100%; min-height:250px"></div>
     </div>
 </div>
-<p>
 
-    @using (Html.BeginForm("Create", "Bookings"))
-    {
-        @Html.AntiForgeryToken()
-        if (User.Identity.IsAuthenticated)
-        {
-            @Html.HiddenFor(model => model.EventID )
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Book" class="btn btn-default" />
-                    </div>
-                </div>
-            </div>
-        }
-    }
-
-</p>
 
 <div class="row">
     <div class="col-12">
-        @Html.DisplayFor(model => model.Description)
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">Description</div>
+                <div class="card-text">
+                    @Html.DisplayFor(model => model.Description)
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<div class="row">
-    @Html.HiddenFor(model => model.Location.Address, new { @id = "Event_Location_Address" })
-    @Html.HiddenFor(model => model.Location.City, new { @id = "Event_Location_City" })
-    @Html.HiddenFor(model => model.Location.Latitude, new { @id = "Event_Location_Latitude" })
-    @Html.HiddenFor(model => model.Location.Longitudes, new { @id = "Event_Location_Longitudes" })
-    @Html.HiddenFor(model => model.Location.PostCode, new { @id = "Event_Location_PostCode" })
-    <div id="map" class="col-12" style="width: 100%; height: 350px;"></div>
 </div>
 
 <p>
