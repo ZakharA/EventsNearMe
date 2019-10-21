@@ -18,6 +18,9 @@
                     if (User.Identity.IsAuthenticated)
                     {
                         @Html.HiddenFor(model => model.EventID)
+                        @Html.HiddenFor(model => model.Name)
+                        @Html.HiddenFor(model => model.Organizer.UserName)
+                        @Html.HiddenFor(model => model.Price)
                         <div class="form-horizontal float-right">
                             <input type="submit" value="Book" class="btn btn-success" />
                         </div>

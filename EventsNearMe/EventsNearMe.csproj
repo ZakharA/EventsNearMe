@@ -376,6 +376,7 @@
     <Content Include="Views\Bookings\Details.cshtml" />
     <Content Include="Views\Bookings\Edit.cshtml" />
     <Content Include="Views\Bookings\Index.cshtml" />
+    <Content Include="Views\Innovation\SendBookingConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -389,7 +390,6 @@
   <ItemGroup>
     <Folder Include="Content\PDF\" />
     <Folder Include="Scripts\App_LocalResources\" />
-    <Folder Include="Views\Innovation\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910082352336_InitialCreate.resx">

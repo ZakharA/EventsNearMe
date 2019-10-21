@@ -71,9 +71,9 @@ namespace EventsNearMe.Controllers
                 var user = db.Users.Find(userId);
                 newBooking.EventId = eventId;
                 newBooking.User = user;
-                db.Bookings.Add(newBooking);
-                db.SaveChanges(); 
-                return View(newBooking);
+                Booking savedBooking = db.Bookings.Add(newBooking);
+                db.SaveChanges();
+                return RedirectToAction("Details", new { @id = savedBooking.BookingID });
             }
 
             return RedirectToAction("Index");

@@ -26,19 +26,20 @@ namespace EventsNearMe.Controllers
         {
             Booking booking = db.Bookings.Include(b => b.Event.Location).FirstOrDefault(b => b.BookingID == bookingID);
             GeneratePDF(booking);
-            return View();
+            return View(booking.Event);
         }
 
         private void GeneratePDF(Booking booking)
         {
             var Renderer = new IronPdf.HtmlToPdf();
             Renderer.PrintOptions.CssMediaType = PdfPrintOptions.PdfCssMediaType.Print;
-            string bookingHtml = RenderRazorViewToString("~/Views/Bookings/Details.cshtml", booking);
+            Renderer.PrintOptions.RenderDelay = 10000;
+            string bookingHtml = RenderRazorViewToString("~/Views/Innovation/SendBookingConfirmation.cshtml", booking.Event);
             var PDF = Renderer.RenderHtmlAsPdf(bookingHtml);
             var pdfName = booking.BookingID.ToString() + booking.Event.EventID.ToString() + booking.Event.Name + ".pdf";
             var OutputPath = "~/Content/PDF/"+ pdfName;
             PDF.SaveAs(OutputPath);
-            Execute(Server.MapPath(OutputPath), pdfName, booking).Wait();
+            //Execute(Server.MapPath(OutputPath), pdfName, booking).Wait();
 
         }
 
