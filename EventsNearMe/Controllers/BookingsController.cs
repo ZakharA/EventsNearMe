@@ -138,6 +138,22 @@ namespace EventsNearMe.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult Rate(int bookingId, int rating)
+        {
+            if(db.Ratings.Where(r => r.BookingId == bookingId).Count() == 0)
+            {
+                Rating newRating = new Rating();
+                newRating.BookingId = bookingId;
+                newRating.number = rating;
+                db.Ratings.Add(newRating);
+                db.SaveChanges();
+                return Json(new { success = true });
+            } else
+            {
+                return Json(new { fail = true });
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
