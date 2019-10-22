@@ -71,10 +71,12 @@ namespace EventsNearMe.Controllers
             }
             if (ModelState.IsValid)
             {
+                var b = db.Events.Include(e => e.Location).Where(e => e.EventID == eventId).First();
                 Booking newBooking = new Booking();
                 var userId = User.Identity.GetUserId();
                 var user = db.Users.Find(userId);
                 newBooking.EventId = eventId;
+                newBooking.Event = db.Events.Include(e => e.Location).Where(e => e.EventID == eventId).First();
                 newBooking.User = user;
                 Booking savedBooking = db.Bookings.Add(newBooking);
                 db.SaveChanges();

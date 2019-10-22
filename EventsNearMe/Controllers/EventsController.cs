@@ -44,6 +44,8 @@ namespace EventsNearMe.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Event @event = db.Events.Include(e => e.Location).FirstOrDefault(e => e.EventID == id);
+            ViewBag.avaliableTickets = avaliableTickets(id);
+
             if (@event == null)
             {
                 return HttpNotFound();
@@ -167,6 +169,13 @@ namespace EventsNearMe.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private int avaliableTickets(int? eventId)
+        {
+            int numberOfTickets = db.Events.Find(eventId).numberOfTickets;
+            int numberOfBookings = db.Bookings.Where(b => b.EventId == eventId).Count();
+            return numberOfTickets - numberOfBookings;
         }
     }
 }

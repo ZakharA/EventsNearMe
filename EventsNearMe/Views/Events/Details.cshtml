@@ -15,7 +15,7 @@
                 @using (Html.BeginForm("Create", "Bookings"))
                 {
                     @Html.AntiForgeryToken()
-                    if (User.Identity.IsAuthenticated)
+                    if (User.Identity.IsAuthenticated && ViewBag.avaliableTickets > 0)
                     {
                         @Html.HiddenFor(model => model.EventID)
                         @Html.HiddenFor(model => model.Name)
