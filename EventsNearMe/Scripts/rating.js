@@ -42,8 +42,8 @@
                 rating: onStar
             }),
         }).done(function (data) {
-            if (data.fail === true) {
-                $.notify("Already rated", "warn");
+            if (data.updated === true) {
+                $.notify("Rating has been updated", "warn");
             } else {
                 $.notify("Success", "success");
             }

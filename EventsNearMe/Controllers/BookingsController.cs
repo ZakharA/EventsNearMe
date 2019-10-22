@@ -152,7 +152,11 @@ namespace EventsNearMe.Controllers
                 return Json(new { success = true });
             } else
             {
-                return Json(new { fail = true });
+                db.Ratings.Where(r => r.Booking.BookingID == bookingId)
+                    .FirstOrDefault()
+                    .number = rating;
+                db.SaveChanges();
+                return Json(new { updated = true });
             }
         }
         protected override void Dispose(bool disposing)
