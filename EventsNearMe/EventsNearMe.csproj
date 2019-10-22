@@ -248,9 +248,13 @@
     <Compile Include="Migrations\201910120717061_Booking update.Designer.cs">
       <DependentUpon>201910120717061_Booking update.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910212218271_Rating.cs" />
-    <Compile Include="Migrations\201910212218271_Rating.Designer.cs">
-      <DependentUpon>201910212218271_Rating.cs</DependentUpon>
+    <Compile Include="Migrations\201910220014598_updated Booking and rating relationship.cs" />
+    <Compile Include="Migrations\201910220014598_updated Booking and rating relationship.Designer.cs">
+      <DependentUpon>201910220014598_updated Booking and rating relationship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910220034394_fix booking_rating_const_error.cs" />
+    <Compile Include="Migrations\201910220034394_fix booking_rating_const_error.Designer.cs">
+      <DependentUpon>201910220034394_fix booking_rating_const_error.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -306,6 +310,7 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -320,6 +325,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\maps.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\notify.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -411,8 +417,11 @@
     <EmbeddedResource Include="Migrations\201910120717061_Booking update.resx">
       <DependentUpon>201910120717061_Booking update.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910212218271_Rating.resx">
-      <DependentUpon>201910212218271_Rating.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910220014598_updated Booking and rating relationship.resx">
+      <DependentUpon>201910220014598_updated Booking and rating relationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910220034394_fix booking_rating_const_error.resx">
+      <DependentUpon>201910220034394_fix booking_rating_const_error.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

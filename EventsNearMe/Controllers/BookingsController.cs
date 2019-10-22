@@ -31,6 +31,7 @@ namespace EventsNearMe.Controllers
                 var userId = User.Identity.GetUserId();
                 result = db.Bookings.Where(e => e.User.Id == userId).Include(b => b.Event).ToList();
             }
+            
             return View(result);
         }
 
@@ -141,7 +142,7 @@ namespace EventsNearMe.Controllers
         [HttpPost]
         public ActionResult Rate(int bookingId, int rating)
         {
-            if(db.Ratings.Where(r => r.BookingId == bookingId).Count() == 0)
+            if(db.Ratings.Where(r => r.Booking.BookingID == bookingId).Count() == 0)
             {
                 Rating newRating = new Rating();
                 newRating.BookingId = bookingId;

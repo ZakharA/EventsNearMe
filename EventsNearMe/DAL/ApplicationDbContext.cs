@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using System.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EventsNearMe.Models
 {
@@ -19,5 +20,10 @@ namespace EventsNearMe.Models
         public System.Data.Entity.DbSet<EventsNearMe.Models.Booking> Bookings { get; set; }
         public System.Data.Entity.DbSet<EventsNearMe.Models.Rating> Ratings { get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

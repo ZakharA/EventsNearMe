@@ -16,7 +16,7 @@ namespace EventsNearMe.Models
         public int EventId { get; set; }
         [ForeignKey("EventId")]
         public virtual Event Event { get; set; }
-
+        public virtual Rating Rating { get; set; }
         public Booking()
         {
         }
