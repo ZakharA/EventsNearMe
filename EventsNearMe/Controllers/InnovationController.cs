@@ -15,6 +15,7 @@ using IronPdf;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Web.Hosting;
+using Newtonsoft.Json;
 
 namespace EventsNearMe.Controllers
 {
@@ -29,6 +30,13 @@ namespace EventsNearMe.Controllers
             string bookingHtml = RenderRazorViewToString("~/Views/Innovation/SendBookingConfirmation.cshtml", booking.Event);
             Task.Run(async () => await sendComfirmation(booking, bookingHtml));
             return View(booking.Event);
+        }
+
+        public void sendUpdateOnEvent(int eventId)
+        {
+            Event UpdatedEvent = db.Events.Where(e => e.EventID == eventId).FirstOrDefault();
+            List<string> EventBookingEmail = db.Bookings.Include(b => b.User).Select(b => b.User.Email).ToList();
+            Task.Run(async () => await sendBulkEmail(EventBookingEmail, UpdatedEvent));
         }
 
         static async Task Execute(String OutputPath, string pdfName, Booking booking)
@@ -47,6 +55,7 @@ namespace EventsNearMe.Controllers
             msg.AddAttachment(pdfName, file);
             var response = await client.SendEmailAsync(msg).ConfigureAwait(false);
         }
+
 
 
         private string RenderRazorViewToString(string viewName, object model)
@@ -72,6 +81,20 @@ namespace EventsNearMe.Controllers
             Execute(HostingEnvironment.MapPath(OutputPath), pdfName, booking).Wait();
         }
 
+        private static async Task sendBulkEmail(List<string> emails, Event UpdatedEvent)
+        {
+            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("noreply@eventsnearme.com", "EventsNearMe");
+            var tos = emails.Select(e => new EmailAddress(e, e)).ToList();
+            var subject = "Change to the upcomming event :" + UpdatedEvent.Name;
+            var plainTextContent = "There's been some changes to " + UpdatedEvent.Name;
+            var htmlContent = "Please visit our website find out what has change.";
+            var showAllRecipients = false;
+            var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, tos, subject, plainTextContent, htmlContent, showAllRecipients);
+            var response = await client.SendEmailAsync(msg).ConfigureAwait(false);
+        }
+
         private static async Task<IronPdf.PdfDocument> RenderPdfAsync(string Html, IronPdf.PdfPrintOptions PrintOptions = null)
         {
             return await Task.Run(() => RenderPdf(Html, PrintOptions));
@@ -89,5 +112,17 @@ namespace EventsNearMe.Controllers
             PdfDocument Pdf = Renderer.RenderHtmlAsPdf(Html);
             return Pdf;
         }
+
+
+        private class UpdateTemplate
+        {
+            [JsonProperty("name")]
+            public string name { get; set; }
+
+            [JsonProperty("event")]
+            public string eventTitle { get; set; }
+
+        }
     }
+
 }
