@@ -32,11 +32,13 @@ namespace EventsNearMe.Controllers
             return View(booking.Event);
         }
 
-        public void sendUpdateOnEvent(int eventId)
+        public ActionResult sendUpdateOnEvent(int eventId)
         {
             Event UpdatedEvent = db.Events.Where(e => e.EventID == eventId).FirstOrDefault();
             List<string> EventBookingEmail = db.Bookings.Include(b => b.User).Select(b => b.User.Email).ToList();
             Task.Run(async () => await sendBulkEmail(EventBookingEmail, UpdatedEvent));
+
+            return Redirect("/Events/");
         }
 
         static async Task Execute(String OutputPath, string pdfName, Booking booking)

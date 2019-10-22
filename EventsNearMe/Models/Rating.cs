@@ -12,7 +12,7 @@ namespace EventsNearMe.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RatingID { get; set; }
         [Key, ForeignKey("Booking")]
-        public int BookingId { get; set; }
+        public int? BookingId { get; set; }
         public virtual  Booking Booking { get; set; }
         public int number { get; set; }
         public Rating()

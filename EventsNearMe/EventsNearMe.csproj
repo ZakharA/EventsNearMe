@@ -256,6 +256,10 @@
     <Compile Include="Migrations\201910220034394_fix booking_rating_const_error.Designer.cs">
       <DependentUpon>201910220034394_fix booking_rating_const_error.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910220403056_optional FK booking key in Rating.cs" />
+    <Compile Include="Migrations\201910220403056_optional FK booking key in Rating.Designer.cs">
+      <DependentUpon>201910220403056_optional FK booking key in Rating.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
@@ -422,6 +426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910220034394_fix booking_rating_const_error.resx">
       <DependentUpon>201910220034394_fix booking_rating_const_error.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910220403056_optional FK booking key in Rating.resx">
+      <DependentUpon>201910220403056_optional FK booking key in Rating.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

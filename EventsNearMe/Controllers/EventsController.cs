@@ -127,7 +127,7 @@ namespace EventsNearMe.Controllers
                 }
 
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("sendUpdateOnEvent", "Innovation", new { @eventId = model.Event.EventID });
             }
             return View(model.Event);
         }
