@@ -32,16 +32,6 @@
             $(stars[i]).addClass('selected');
         }
 
-        // JUST RESPONSE (Not needed)
-        var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
-        var msg = "";
-        if (ratingValue > 1) {
-            msg = "Thanks! You rated this " + ratingValue + " stars.";
-        }
-        else {
-            msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
-        }
-
         $.ajax({
             url: '/Bookings/Rate',
             type: 'POST',
@@ -49,12 +39,15 @@
             datatype: 'json',
             data: JSON.stringify({
                 bookingId: ratedBookingId,
-                rating: ratingValue
+                rating: onStar
             }),
         }).done(function (data) {
-            $.notify("Success", "success");
-        }).fail(function (data) {
-            $.notify("Already rated", "warn");
+            if (data.fail === true) {
+                $.notify("Already rated", "warn");
+            } else {
+                $.notify("Success", "success");
+            }
+            
         });
 
     });

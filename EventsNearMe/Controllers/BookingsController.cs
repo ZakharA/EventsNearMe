@@ -29,7 +29,7 @@ namespace EventsNearMe.Controllers
             else
             {
                 var userId = User.Identity.GetUserId();
-                result = db.Bookings.Where(e => e.User.Id == userId).Include(b => b.Event).ToList();
+                result = db.Bookings.Where(e => e.User.Id == userId).Include(b => b.Event).Include(b => b.Rating).ToList();
             }
             
             return View(result);
