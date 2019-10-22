@@ -267,6 +267,10 @@
     <Compile Include="Migrations\201910220403056_optional FK booking key in Rating.Designer.cs">
       <DependentUpon>201910220403056_optional FK booking key in Rating.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910220821273_add number of tickets on sale.cs" />
+    <Compile Include="Migrations\201910220821273_add number of tickets on sale.Designer.cs">
+      <DependentUpon>201910220821273_add number of tickets on sale.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
@@ -484,6 +488,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910220403056_optional FK booking key in Rating.resx">
       <DependentUpon>201910220403056_optional FK booking key in Rating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910220821273_add number of tickets on sale.resx">
+      <DependentUpon>201910220821273_add number of tickets on sale.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

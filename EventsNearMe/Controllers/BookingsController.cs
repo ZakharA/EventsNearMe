@@ -65,6 +65,10 @@ namespace EventsNearMe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "EventID")] int eventId)
         {
+            if (avaliableTickets(eventId) <= 0)
+            {
+                return Redirect(Request.UrlReferrer.AbsolutePath);
+            }
             if (ModelState.IsValid)
             {
                 Booking newBooking = new Booking();
@@ -168,5 +172,11 @@ namespace EventsNearMe.Controllers
             base.Dispose(disposing);
         }
 
+        private int avaliableTickets(int eventId)
+        {
+            int numberOfTickets = db.Events.Find(eventId).numberOfTickets;
+            int numberOfBookings = db.Bookings.Where(b => b.EventId == eventId).Count();
+            return numberOfTickets - numberOfBookings;
+        }
     }
 }

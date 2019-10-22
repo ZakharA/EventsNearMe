@@ -31,6 +31,8 @@ namespace EventsNearMe.Models
         public virtual ApplicationUser Organizer { get; set; }
         [EnumDataType(typeof(EventType))]
         public EventType EventCategory { get; set; }
+        [Range(1, 500000, ErrorMessage = "Number of tickets must be between 1 to 500000")]
+        public int numberOfTickets { get; set; }
         public bool IsFree { get; set; }
         [DataType(DataType.Currency)]
         public double Price { get; set; }
