@@ -9,7 +9,15 @@
         <div class="card">
             <img class="card-img-top" src="~/Content/Images/@Model.CoverImage">
             <div class="card-body">
-                <div class="card-text"><h3>@Html.DisplayFor(model => model.Name)</h3></div>
+                <div class="card-text">
+                    <h3>
+                        @Html.DisplayFor(model => model.Name)
+                        <span class="badge badge-info">
+                            @Model.StartingDate.ToString("dd/MM/yyyy") - 
+                            @{ @Html.Raw(@Model.StartingDate.AddDays(@Model.eventLength).ToString("dd/MM/yyyy")); }
+                        </span>
+                    </h3>
+                </div>
                 <div class="card-text">Organizer: @Html.DisplayFor(model => model.Organizer.UserName)</div>
                 <div class="card-text">Price: @Html.DisplayFor(model => model.Price)</div>
                 @using (Html.BeginForm("Create", "Bookings"))

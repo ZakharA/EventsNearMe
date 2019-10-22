@@ -2,9 +2,14 @@
     <div class="card">
         <img src="~/Content/Images/@Page.Event.CoverImage" class="card-img-top" alt="...">
         <div class="card-body">
-            <h5 class="card-title">@Page.Event.Name</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            @Html.ActionLink("Read more",  "Details", "Events", new { id = Page.Event.EventID }, htmlAttributes: new { @class = "card-link" })
-        </div>
+            <h5 class="card-title">
+                @Page.Event.Name 
+                <span class="badge badge-info">@Page.Event.StartingDate.ToString("dd/MM/yyyy") - @{ @Html.Raw(Page.Event.StartingDate.AddDays(@Page.Event.eventLength).ToString("dd/MM/yyyy")); }</span></p>
+            </h5>
+            <p class="card-text">@Page.Event.Description</p>
+            <p class="card-text">
+
+@Html.ActionLink("Read more", "Details", "Events", new { id = Page.Event.EventID }, htmlAttributes: new { @class = "card-link" })
+</div>
     </div>
 </section> 
