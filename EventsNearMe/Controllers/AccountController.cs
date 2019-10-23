@@ -155,7 +155,8 @@ namespace EventsNearMe.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var result1 = await  UserManager.AddToRoleAsync(user.Id, "Contributor");
+                    string userRole = model.isEventOrganizer ? "Contributor" : "Visitor";
+                    var result1 = await  UserManager.AddToRoleAsync(user.Id, userRole);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

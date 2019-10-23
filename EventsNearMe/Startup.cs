@@ -47,6 +47,14 @@ namespace EventsNearMe
                 roleManager.Create(role);
 
             }
+
+            if (!roleManager.RoleExists("Visitor"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Visitor";
+                roleManager.Create(role);
+
+            }
         }
     }
 }
