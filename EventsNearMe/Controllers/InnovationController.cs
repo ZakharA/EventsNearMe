@@ -32,6 +32,28 @@ namespace EventsNearMe.Controllers
             return View(booking.Event);
         }
 
+
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+
+        public JsonResult chartData()
+        {
+            var userId = User.Identity.GetUserId();
+            var result = (from e in db.Events
+                          join b in db.Bookings on e.EventID equals b.EventId
+                          where e.Organizer.Id == userId
+                          group e by e.Name into r
+                          select new
+                          {
+                              eventName = r.Key,
+                              nBookings = r.Count()
+                          }).ToList(); 
+
+            return Json( new { Labels = result.Select(x => x.eventName).ToArray(), data = result.Select(x => x.nBookings).ToArray() } , JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult sendUpdateOnEvent(int eventId)
         {
             Event UpdatedEvent = db.Events.Where(e => e.EventID == eventId).FirstOrDefault();
@@ -57,8 +79,6 @@ namespace EventsNearMe.Controllers
             msg.AddAttachment(pdfName, file);
             var response = await client.SendEmailAsync(msg).ConfigureAwait(false);
         }
-
-
 
         private string RenderRazorViewToString(string viewName, object model)
         {
