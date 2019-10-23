@@ -1,8 +1,6 @@
 ﻿using EventsNearMe.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace EventsNearMe.Controllers
@@ -15,7 +13,7 @@ namespace EventsNearMe.Controllers
         public ActionResult Index()
         {
            
-            return View(db.Events.ToArray());
+            return View(db.Events.Where(e => System.Data.Entity.DbFunctions.AddDays(e.StartingDate, e.eventLength) >= DateTime.Now).ToArray());
         }
 
         public ActionResult About()
