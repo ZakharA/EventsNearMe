@@ -13,43 +13,49 @@
         <th>
             Starting date
         </th>
-        <th></th>
+        <th>
+            Rating
+        </th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Event.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Event.StartingDate)
-            </td>
-            <td class='rating-widget' id="@item.BookingID">
-                <div class='rating-stars text-center'>
-                    <ul id='stars'>
-                        <li class='star @if (item.Rating != null && item.Rating.number >= 1 ) { @Html.Raw("selected");  }' title='Poor' data-value='1'>
-<i class='fa fa-star fa-fw'></i>
-                        </li>
-                        <li class='star @if (item.Rating != null && item.Rating.number >= 2 ) { @Html.Raw("selected");  }' title='Fair' data-value='2'>
-                            <i class='fa fa-star fa-fw'></i>
-                        </li>
-                        <li class='star @if (item.Rating != null && item.Rating.number >= 3 ) { @Html.Raw("selected");  }' title='Good' data-value='3'>
-                            <i class='fa fa-star fa-fw'></i>
-                        </li>
-                        <li class='star @if (item.Rating != null && item.Rating.number >= 4 ) { @Html.Raw("selected");  }' title='Excellent' data-value='4'>
-                            <i class='fa fa-star fa-fw'></i>
-                        </li>
-                        <li class='star @if (item.Rating != null && item.Rating.number >= 5 ) { @Html.Raw("selected");  }' title='WOW!!!' data-value='5'>
-                            <i class='fa fa-star fa-fw'></i>
-                        </li>
-                    </ul>
-                </div>
-            </td>
-            @*<td>
-                    @Html.ActionLink("View", "Details", new { id = item.BookingID })
-                </td>*@
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Event.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Event.StartingDate)
+    </td>
+
+    <td class='rating-widget' id="@item.BookingID">
+        @if (@item.Event.StartingDate < DateTime.Now)
+        {
+            <div class='rating-stars text-center'>
+                <ul id='stars'>
+                    <li class='star @if (item.Rating != null && item.Rating.number >= 1 ) { @Html.Raw("selected");  }' title='Poor' data-value='1'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star @if (item.Rating != null && item.Rating.number >= 2 ) { @Html.Raw("selected");  }' title='Fair' data-value='2'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star @if (item.Rating != null && item.Rating.number >= 3 ) { @Html.Raw("selected");  }' title='Good' data-value='3'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star @if (item.Rating != null && item.Rating.number >= 4 ) { @Html.Raw("selected");  }' title='Excellent' data-value='4'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star @if (item.Rating != null && item.Rating.number >= 5 ) { @Html.Raw("selected");  }' title='WOW!!!' data-value='5'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                </ul>
+            </div>
+        }
+    </td>
+    @*<td>
+            @Html.ActionLink("View", "Details", new { id = item.BookingID })
+        </td>*@
+</tr>
     }
 
 </table>
