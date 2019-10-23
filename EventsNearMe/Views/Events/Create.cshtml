@@ -21,10 +21,11 @@
     </div>
 
     <div class="form-group">
-        @Html.Label("Cover image", htmlAttributes: new { @class = "control-label " })
-        @Html.TextBox("CoverImage", "", new { type = "file", @class = "form-control-file", @required = "" })
-        @Html.ValidationMessageFor(model => model.coverImage, "", new { @class = "text-danger" })
-
+        @Html.LabelFor(model => model.coverImage, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBox("CoverImage", "", new { type = "file" })
+            @Html.ValidationMessageFor(model => model.coverImage, "", new { @class = "text-danger" })
+        </div>
     </div>
 
     <div class="form-group">
@@ -46,6 +47,11 @@
         @Html.EditorFor(model => model.Event.eventLength, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.Event.eventLength, "", new { @class = "text-danger" })
 
+    </div>
+    <div class="form-group">
+        @Html.Label("Available tickets", htmlAttributes: new { @class = "control-label " })
+        @Html.EditorFor(model => model.Event.numberOfTickets, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Event.numberOfTickets, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
         <div class="row">

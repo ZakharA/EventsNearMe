@@ -47,6 +47,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework.Extended, Version=6.0.0.0, Culture=neutral, PublicKeyToken=05b7e29bdd433584, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFrameworkExtended.6.2.0.4\lib\net45\EntityFramework.Extended.dll</HintPath>
+    </Reference>
     <Reference Include="IronPdf, Version=2019.7.0.21100, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
       <HintPath>packages\IronPdf.2019.7.0\lib\net40\IronPdf.dll</HintPath>
     </Reference>

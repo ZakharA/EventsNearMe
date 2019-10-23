@@ -1,4 +1,5 @@
-﻿using EventsNearMe.Models;
+﻿using EntityFramework.Extensions;
+using EventsNearMe.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -81,7 +82,7 @@ namespace EventsNearMe.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(model.Event);
+            return View(model);
         }
 
         private void saveImage(EventModel model)
@@ -131,7 +132,7 @@ namespace EventsNearMe.Controllers
                 db.SaveChanges();
                 return RedirectToAction("sendUpdateOnEvent", "Innovation", new { @eventId = model.Event.EventID });
             }
-            return View(model.Event);
+            return View(model);
         }
 
         // GET: Events/Delete/5
@@ -154,11 +155,12 @@ namespace EventsNearMe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-
-            Event @event = db.Events.Include(e => e.Location).FirstOrDefault(e => e.EventID == id); ;
+            var bookings = db.Bookings.Where(b => b.EventId == id).Select(b => b.BookingID).ToList();
+            db.Ratings.Where(r => bookings.Contains((int)r.BookingId)).Delete();
+            db.Bookings.Where(b => b.EventId == id).Include(b => b.Rating).Delete(); 
+            Event @event = db.Events.Include(e => e.Location).FirstOrDefault(e => e.EventID == id); 
             db.Events.Remove(@event);
             db.SaveChanges();
-
             return RedirectToAction("Index");
         }
 

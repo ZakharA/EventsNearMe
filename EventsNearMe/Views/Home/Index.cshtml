@@ -6,8 +6,22 @@
 }
 
 <div class="row mb-2">
+    @if (Model.Length == 0)
+    {
+        
+            <div class="col-12">
+                <div class="card border-warning mb-3">
+                    <div class="card-body text-center text-warning">
+                        Sorry, currently there are no events for you.
+                    </div>
+                </div>
+            </div>
+  
+    }
+
     @foreach (Event e in Model)
     {
         @RenderPage("~/Views/Shared/_EventCard.cshtml", new { Event = e })
     }
+
 </div>
